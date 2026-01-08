@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Ruler, Calendar, Wrench, AlertTriangle, FileText, Snowflake } from 'lucide-react'
+import { Ruler, Calendar, Wrench, AlertTriangle, FileText, Snowflake, Wind } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export function DashboardPage() {
@@ -51,6 +51,14 @@ export function DashboardPage() {
       icon: Snowflake,
       color: 'text-cyan-600',
       bgColor: 'bg-cyan-100',
+    },
+    {
+      name: 'Air Quality Log',
+      description: 'Track CO and NO2 levels for safety compliance',
+      href: '/air-quality',
+      icon: Wind,
+      color: 'text-slate-600',
+      bgColor: 'bg-slate-100',
     },
   ]
 

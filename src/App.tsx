@@ -10,6 +10,7 @@ import { MaintenancePage } from '@/pages/modules/MaintenancePage'
 import { IncidentsPage } from '@/pages/modules/IncidentsPage'
 import { DailyReportsPage } from '@/pages/modules/DailyReportsPage'
 import { RefrigerationPage } from '@/pages/modules/RefrigerationPage'
+import { AirQualityPage } from '@/pages/modules/AirQualityPage'
 
 function App() {
   const { user, loading } = useAuth()
@@ -41,6 +42,7 @@ function App() {
         <Route path="/incidents" element={<IncidentsPage />} />
         <Route path="/daily-reports" element={<DailyReportsPage />} />
         <Route path="/refrigeration" element={<RefrigerationPage />} />
+        <Route path="/air-quality" element={<AirQualityPage />} />
       </Route>
 
       {/* Default redirect */}

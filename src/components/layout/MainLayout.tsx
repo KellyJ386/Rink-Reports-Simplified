@@ -9,6 +9,7 @@ import {
   AlertTriangle,
   FileText,
   Snowflake,
+  Wind,
   LogOut,
   Menu,
   X
@@ -28,6 +29,7 @@ export function MainLayout() {
     { name: 'Daily Reports', href: '/daily-reports', icon: FileText },
     { name: 'Incidents', href: '/incidents', icon: AlertTriangle },
     { name: 'Refrigeration', href: '/refrigeration', icon: Snowflake },
+    { name: 'Air Quality', href: '/air-quality', icon: Wind },
   ]
 
   const handleSignOut = async () => {
