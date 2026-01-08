@@ -8,6 +8,7 @@ import { IceDepthPage } from '@/pages/modules/IceDepthPage'
 import { SchedulingPage } from '@/pages/modules/SchedulingPage'
 import { MaintenancePage } from '@/pages/modules/MaintenancePage'
 import { IncidentsPage } from '@/pages/modules/IncidentsPage'
+import { DailyReportsPage } from '@/pages/modules/DailyReportsPage'
 
 function App() {
   const { user, loading } = useAuth()
@@ -37,6 +38,7 @@ function App() {
         <Route path="/scheduling" element={<SchedulingPage />} />
         <Route path="/maintenance" element={<MaintenancePage />} />
         <Route path="/incidents" element={<IncidentsPage />} />
+        <Route path="/daily-reports" element={<DailyReportsPage />} />
       </Route>
 
       {/* Default redirect */}

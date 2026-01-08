@@ -7,6 +7,7 @@ import {
   Calendar,
   Wrench,
   AlertTriangle,
+  FileText,
   LogOut,
   Menu,
   X
@@ -23,6 +24,7 @@ export function MainLayout() {
     { name: 'Ice Depth Log', href: '/ice-depth', icon: Ruler },
     { name: 'Scheduling', href: '/scheduling', icon: Calendar },
     { name: 'Maintenance', href: '/maintenance', icon: Wrench },
+    { name: 'Daily Reports', href: '/daily-reports', icon: FileText },
     { name: 'Incidents', href: '/incidents', icon: AlertTriangle },
   ]
 
