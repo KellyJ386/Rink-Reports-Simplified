@@ -6,6 +6,8 @@ import { IceMakeForm } from '@/components/modules/maintenance/IceMakeForm';
 import { IceMakeList } from '@/components/modules/maintenance/IceMakeList';
 import { BladeChangeForm } from '@/components/modules/maintenance/BladeChangeForm';
 import { BladeChangeList } from '@/components/modules/maintenance/BladeChangeList';
+import { EdgingForm } from '@/components/modules/maintenance/EdgingForm';
+import { EdgingList } from '@/components/modules/maintenance/EdgingList';
 import {
   useIceMachines,
   useMaintenanceLogs,
@@ -87,6 +89,10 @@ export function MaintenancePage() {
   const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
   const thisMonthBladeChanges = bladeChangeLogs.filter((log: any) => log.log_date >= thisMonthStart).length;
 
+  // Calculate this week's edging
+  const thisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay()).toISOString().split('T')[0];
+  const thisWeekEdging = edgingLogs.filter((log: any) => log.log_date >= thisWeekStart).length;
+
   const tabs = [
     {
       id: 'ice-make' as TabType,
@@ -124,10 +130,12 @@ export function MaintenancePage() {
             Track resurfacing, blade changes, edging, and circle checks
           </p>
         </div>
-        {!showForm && (activeTab === 'ice-make' || activeTab === 'blade-change') && (
+        {!showForm && (activeTab === 'ice-make' || activeTab === 'blade-change' || activeTab === 'edging') && (
           <Button onClick={handleCreateNew}>
             <Plus className="mr-2 h-4 w-4" />
-            {activeTab === 'ice-make' ? 'New Ice Make' : 'New Blade Change'}
+            {activeTab === 'ice-make' && 'New Ice Make'}
+            {activeTab === 'blade-change' && 'New Blade Change'}
+            {activeTab === 'edging' && 'New Edging'}
           </Button>
         )}
       </div>
@@ -160,7 +168,7 @@ export function MaintenancePage() {
             <CardDescription>This week</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">0</div>
+            <div className="text-3xl font-bold">{thisWeekEdging}</div>
           </CardContent>
         </Card>
 
@@ -249,19 +257,26 @@ export function MaintenancePage() {
         )}
 
         {activeTab === 'edging' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Edging Log</CardTitle>
-              <CardDescription>Track ice edge maintenance</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12 text-muted-foreground">
-                <Ruler className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p>Edging module coming soon</p>
-                <p className="text-sm mt-2">This tab will track edge maintenance sessions</p>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="space-y-6">
+            {showForm ? (
+              <EdgingForm
+                log={editingLog}
+                machines={machines}
+                rinks={rinks}
+                facilityId={facilityId || ''}
+                onSave={handleSave}
+                onCancel={handleCancel}
+              />
+            ) : (
+              <EdgingList
+                logs={edgingLogs}
+                machines={machines}
+                rinks={rinks}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            )}
+          </div>
         )}
 
         {activeTab === 'circle-check' && (
