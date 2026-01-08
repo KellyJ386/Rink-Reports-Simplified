@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Plus, Wrench, Scissors, Ruler, CheckCircle2 } from 'lucide-react';
 import { IceMakeForm } from '@/components/modules/maintenance/IceMakeForm';
 import { IceMakeList } from '@/components/modules/maintenance/IceMakeList';
+import { BladeChangeForm } from '@/components/modules/maintenance/BladeChangeForm';
+import { BladeChangeList } from '@/components/modules/maintenance/BladeChangeList';
 import {
   useIceMachines,
   useMaintenanceLogs,
@@ -80,6 +82,11 @@ export function MaintenancePage() {
   const today = new Date().toISOString().split('T')[0];
   const todayIceMakes = iceMakeLogs.filter((log: any) => log.log_date === today).length;
 
+  // Calculate this month's blade changes
+  const now = new Date();
+  const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+  const thisMonthBladeChanges = bladeChangeLogs.filter((log: any) => log.log_date >= thisMonthStart).length;
+
   const tabs = [
     {
       id: 'ice-make' as TabType,
@@ -117,10 +124,10 @@ export function MaintenancePage() {
             Track resurfacing, blade changes, edging, and circle checks
           </p>
         </div>
-        {!showForm && activeTab === 'ice-make' && (
+        {!showForm && (activeTab === 'ice-make' || activeTab === 'blade-change') && (
           <Button onClick={handleCreateNew}>
             <Plus className="mr-2 h-4 w-4" />
-            New Ice Make
+            {activeTab === 'ice-make' ? 'New Ice Make' : 'New Blade Change'}
           </Button>
         )}
       </div>
@@ -143,7 +150,7 @@ export function MaintenancePage() {
             <CardDescription>This month</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">0</div>
+            <div className="text-3xl font-bold">{thisMonthBladeChanges}</div>
           </CardContent>
         </Card>
 
@@ -221,19 +228,24 @@ export function MaintenancePage() {
         )}
 
         {activeTab === 'blade-change' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Blade Change Log</CardTitle>
-              <CardDescription>Track Zamboni blade replacements</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12 text-muted-foreground">
-                <Scissors className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p>Blade Change module coming soon</p>
-                <p className="text-sm mt-2">This tab will track blade replacement history</p>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="space-y-6">
+            {showForm ? (
+              <BladeChangeForm
+                log={editingLog}
+                machines={machines}
+                facilityId={facilityId || ''}
+                onSave={handleSave}
+                onCancel={handleCancel}
+              />
+            ) : (
+              <BladeChangeList
+                logs={bladeChangeLogs}
+                machines={machines}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            )}
+          </div>
         )}
 
         {activeTab === 'edging' && (
