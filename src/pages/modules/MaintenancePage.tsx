@@ -8,6 +8,8 @@ import { BladeChangeForm } from '@/components/modules/maintenance/BladeChangeFor
 import { BladeChangeList } from '@/components/modules/maintenance/BladeChangeList';
 import { EdgingForm } from '@/components/modules/maintenance/EdgingForm';
 import { EdgingList } from '@/components/modules/maintenance/EdgingList';
+import { CircleCheckForm } from '@/components/modules/maintenance/CircleCheckForm';
+import { CircleCheckList } from '@/components/modules/maintenance/CircleCheckList';
 import {
   useIceMachines,
   useMaintenanceLogs,
@@ -93,6 +95,9 @@ export function MaintenancePage() {
   const thisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay()).toISOString().split('T')[0];
   const thisWeekEdging = edgingLogs.filter((log: any) => log.log_date >= thisWeekStart).length;
 
+  // Calculate today's circle checks
+  const todayCircleChecks = circleCheckLogs.filter((log: any) => log.log_date === today).length;
+
   const tabs = [
     {
       id: 'ice-make' as TabType,
@@ -130,12 +135,13 @@ export function MaintenancePage() {
             Track resurfacing, blade changes, edging, and circle checks
           </p>
         </div>
-        {!showForm && (activeTab === 'ice-make' || activeTab === 'blade-change' || activeTab === 'edging') && (
+        {!showForm && (
           <Button onClick={handleCreateNew}>
             <Plus className="mr-2 h-4 w-4" />
             {activeTab === 'ice-make' && 'New Ice Make'}
             {activeTab === 'blade-change' && 'New Blade Change'}
             {activeTab === 'edging' && 'New Edging'}
+            {activeTab === 'circle-check' && 'New Circle Check'}
           </Button>
         )}
       </div>
@@ -178,7 +184,7 @@ export function MaintenancePage() {
             <CardDescription>Today</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">0</div>
+            <div className="text-3xl font-bold">{todayCircleChecks}</div>
           </CardContent>
         </Card>
       </div>
@@ -280,19 +286,24 @@ export function MaintenancePage() {
         )}
 
         {activeTab === 'circle-check' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Circle Check Log</CardTitle>
-              <CardDescription>Track circle and line inspections</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12 text-muted-foreground">
-                <CheckCircle2 className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p>Circle Check module coming soon</p>
-                <p className="text-sm mt-2">This tab will track circle and line inspections</p>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="space-y-6">
+            {showForm ? (
+              <CircleCheckForm
+                log={editingLog}
+                machines={machines}
+                facilityId={facilityId || ''}
+                onSave={handleSave}
+                onCancel={handleCancel}
+              />
+            ) : (
+              <CircleCheckList
+                logs={circleCheckLogs}
+                machines={machines}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            )}
+          </div>
         )}
       </div>
     </div>
