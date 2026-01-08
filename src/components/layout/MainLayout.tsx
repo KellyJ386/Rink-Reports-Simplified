@@ -8,6 +8,7 @@ import {
   Wrench,
   AlertTriangle,
   FileText,
+  Snowflake,
   LogOut,
   Menu,
   X
@@ -26,6 +27,7 @@ export function MainLayout() {
     { name: 'Maintenance', href: '/maintenance', icon: Wrench },
     { name: 'Daily Reports', href: '/daily-reports', icon: FileText },
     { name: 'Incidents', href: '/incidents', icon: AlertTriangle },
+    { name: 'Refrigeration', href: '/refrigeration', icon: Snowflake },
   ]
 
   const handleSignOut = async () => {

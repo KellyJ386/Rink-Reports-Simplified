@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Ruler, Calendar, Wrench, AlertTriangle } from 'lucide-react'
+import { Ruler, Calendar, Wrench, AlertTriangle, FileText, Snowflake } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export function DashboardPage() {
@@ -29,12 +29,28 @@ export function DashboardPage() {
       bgColor: 'bg-orange-100',
     },
     {
+      name: 'Daily Reports',
+      description: 'Create custom report templates and track daily operations',
+      href: '/daily-reports',
+      icon: FileText,
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-100',
+    },
+    {
       name: 'Incident Reports',
-      description: 'Document safety incidents with interactive body diagrams',
+      description: 'Document safety incidents and track injury reports',
       href: '/incidents',
       icon: AlertTriangle,
       color: 'text-red-600',
       bgColor: 'bg-red-100',
+    },
+    {
+      name: 'Refrigeration Log',
+      description: 'Monitor system performance with trend analysis and alerts',
+      href: '/refrigeration',
+      icon: Snowflake,
+      color: 'text-cyan-600',
+      bgColor: 'bg-cyan-100',
     },
   ]
 
@@ -47,7 +63,7 @@ export function DashboardPage() {
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {modules.map((module) => {
           const Icon = module.icon
           return (
