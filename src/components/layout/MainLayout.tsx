@@ -43,7 +43,10 @@ export function MainLayout() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link to="/dashboard" className="flex items-center space-x-2">
-              <span className="font-bold text-xl">MFO</span>
+              <div className="inline-flex items-center gap-1">
+                <span className="font-black text-sm bg-[#2c4a73] text-white px-2 py-1">MAX</span>
+                <span className="font-black text-sm bg-[#5cb85c] text-white px-2 py-1">FACILITY</span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
