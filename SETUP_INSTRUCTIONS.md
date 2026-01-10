@@ -1,6 +1,6 @@
-# MFO Setup Instructions
+# Max Facility Rink Reports Setup Instructions
 
-Quick-start guide to get the MFO (Max Facility Operations) platform running locally.
+Quick-start guide to get the Max Facility Rink Reports platform running locally.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ Quick-start guide to get the MFO (Max Facility Operations) platform running loca
 1. Go to https://app.supabase.com
 2. Click "New Project"
 3. Enter project details:
-   - Name: `mfo-development` (or your choice)
+   - Name: `rink-reports-dev` (or your choice)
    - Database Password: (save this securely)
    - Region: Choose closest to you
 4. Wait for project to initialize (~2 minutes)

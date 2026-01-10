@@ -1,10 +1,10 @@
-# MFO - Max Facility Operations
+# Max Facility Rink Reports
 
 **Simplified Edition - January 2026**
 
 ## Overview
 
-MFO (Max Facility Operations) is a comprehensive SaaS platform designed specifically for ice rink facility management. It replaces paper logs, spreadsheets, and fragmented systems with a unified digital solution that tracks ice quality, staff operations, equipment maintenance, safety compliance, and daily operations.
+Max Facility Rink Reports is a comprehensive SaaS platform designed specifically for ice rink facility management. It replaces paper logs, spreadsheets, and fragmented systems with a unified digital solution that tracks ice quality, staff operations, equipment maintenance, safety compliance, and daily operations.
 
 ## Target Market
 

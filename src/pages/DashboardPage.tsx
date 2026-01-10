@@ -67,7 +67,7 @@ export function DashboardPage() {
       <div>
         <h1 className="text-3xl font-bold">Dashboard</h1>
         <p className="text-muted-foreground mt-2">
-          Welcome to Max Facility Operations. Select a module to get started.
+          Welcome to Max Facility Rink Reports. Select a module to get started.
         </p>
       </div>
 

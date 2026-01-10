@@ -1,6 +1,6 @@
-# MFO Deployment Checklist
+# Max Facility Rink Reports Deployment Checklist
 
-Complete checklist to get MFO running from scratch. Follow in order.
+Complete checklist to get Max Facility Rink Reports running from scratch. Follow in order.
 
 ---
 
@@ -19,7 +19,7 @@ Complete checklist to get MFO running from scratch. Follow in order.
 ### 1.1 Create Project
 - [ ] Login to https://app.supabase.com
 - [ ] Click "New Project"
-- [ ] Name: `mfo-development` (or your choice)
+- [ ] Name: `rink-reports-dev` (or your choice)
 - [ ] Generate strong database password
 - [ ] Save password securely
 - [ ] Choose region closest to you
@@ -250,7 +250,7 @@ SELECT * FROM profiles WHERE email = 'admin@test.com';
 
 ## 📊 SUCCESS CRITERIA
 
-You've successfully deployed MFO when:
+You've successfully deployed Max Facility Rink Reports when:
 
 ✅ All 7 migrations ran without errors
 ✅ Admin user can login
