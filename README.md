@@ -61,6 +61,8 @@ Max Facility Rink Reports is a comprehensive SaaS platform designed specifically
 - **[Migration Quick Start](MIGRATION_QUICK_START.md)** - Database migration guide
 - **[Testing Guide](TESTING_GUIDE.md)** - 100+ test cases for all modules
 - **[Implementation Plan](IMPLEMENTATION_PLAN.md)** - Phase 2 roadmap and features
+- **[Security Implementation](SECURITY_IMPLEMENTATION.md)** - Authentication & security features
+- **[Supabase Security Setup](SUPABASE_SECURITY_SETUP.md)** - Configure security in Supabase
 - **[Complete PRD](docs/MFO-PRD.md)** - Full product requirements (60+ pages)
 - **[Migration README](supabase/migrations/README.md)** - Detailed database schema docs
 
@@ -106,17 +108,30 @@ Max Facility Rink Reports is a comprehensive SaaS platform designed specifically
 - ✅ Pass/Fail/N/A status per item
 
 **Database & Infrastructure:**
-- ✅ 7 database migrations (001-007)
+- ✅ 8 database migrations (001-008)
 - ✅ Row Level Security (RLS) policies for multi-tenant isolation
 - ✅ Supabase Storage integration for photos
 - ✅ React Query hooks for all modules
 - ✅ Complete test data and seed files
+
+**Authentication & Security:**
+- ✅ Password strength requirements (8+ chars, uppercase, lowercase, number, special)
+- ✅ Password visibility toggle on all password inputs
+- ✅ Rate limiting (5 attempts per 15 minutes)
+- ✅ Account lockout (10 attempts per hour = 24hr lock)
+- ✅ Login attempt tracking and auditing
+- ✅ Login history tracking
+- ✅ Session timeout (30 min idle with 5 min warning)
+- ✅ Password reset flow with secure tokens
+- ✅ Helpful error messages and security feedback
 
 **Documentation:**
 - ✅ Setup instructions
 - ✅ Migration guide
 - ✅ Testing guide (100+ test cases)
 - ✅ Implementation plan
+- ✅ Security implementation guide
+- ✅ Supabase security setup guide
 - ✅ Database schema docs
 
 ### 📋 Next Steps

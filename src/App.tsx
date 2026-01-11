@@ -2,7 +2,10 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
 import { MainLayout } from '@/components/layout/MainLayout'
 import { AuthLayout } from '@/components/layout/AuthLayout'
+import { SessionTimeout } from '@/components/auth/SessionTimeout'
 import { LoginPage } from '@/pages/LoginPage'
+import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
+import { ResetPasswordPage } from '@/pages/ResetPasswordPage'
 import { DashboardPage } from '@/pages/DashboardPage'
 import { IceDepthPage } from '@/pages/modules/IceDepthPage'
 import { SchedulingPage } from '@/pages/modules/SchedulingPage'
@@ -27,27 +30,40 @@ function App() {
   }
 
   return (
-    <Routes>
-      {/* Public Routes */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <LoginPage />} />
-      </Route>
+    <>
+      {/* Session timeout warning - only shows for authenticated users */}
+      <SessionTimeout timeoutMinutes={30} warningMinutes={5} />
 
-      {/* Protected Routes */}
-      <Route element={user ? <MainLayout /> : <Navigate to="/login" />}>
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/ice-depth" element={<IceDepthPage />} />
-        <Route path="/scheduling" element={<SchedulingPage />} />
-        <Route path="/maintenance" element={<MaintenancePage />} />
-        <Route path="/incidents" element={<IncidentsPage />} />
-        <Route path="/daily-reports" element={<DailyReportsPage />} />
-        <Route path="/refrigeration" element={<RefrigerationPage />} />
-        <Route path="/air-quality" element={<AirQualityPage />} />
-      </Route>
+      <Routes>
+        {/* Public Routes */}
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <LoginPage />} />
+          <Route
+            path="/forgot-password"
+            element={user ? <Navigate to="/dashboard" /> : <ForgotPasswordPage />}
+          />
+          <Route
+            path="/reset-password"
+            element={user ? <Navigate to="/dashboard" /> : <ResetPasswordPage />}
+          />
+        </Route>
 
-      {/* Default redirect */}
-      <Route path="*" element={<Navigate to={user ? "/dashboard" : "/login"} />} />
-    </Routes>
+        {/* Protected Routes */}
+        <Route element={user ? <MainLayout /> : <Navigate to="/login" />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/ice-depth" element={<IceDepthPage />} />
+          <Route path="/scheduling" element={<SchedulingPage />} />
+          <Route path="/maintenance" element={<MaintenancePage />} />
+          <Route path="/incidents" element={<IncidentsPage />} />
+          <Route path="/daily-reports" element={<DailyReportsPage />} />
+          <Route path="/refrigeration" element={<RefrigerationPage />} />
+          <Route path="/air-quality" element={<AirQualityPage />} />
+        </Route>
+
+        {/* Default redirect */}
+        <Route path="*" element={<Navigate to={user ? "/dashboard" : "/login"} />} />
+      </Routes>
+    </>
   )
 }
 
