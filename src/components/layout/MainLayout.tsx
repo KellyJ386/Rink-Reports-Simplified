@@ -1,5 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
+import { usePermissions } from '@/hooks/usePermissions'
 import { Button } from '@/components/ui/button'
 import {
   Home,
@@ -12,12 +13,14 @@ import {
   Wind,
   LogOut,
   Menu,
-  X
+  X,
+  Shield
 } from 'lucide-react'
 import { useState } from 'react'
 
 export function MainLayout() {
   const { signOut } = useAuth()
+  const { isAdmin } = usePermissions()
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -73,6 +76,16 @@ export function MainLayout() {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Admin Panel Link - Only for admins */}
+            {isAdmin() && (
+              <Link to="/admin">
+                <Button variant="outline" size="sm" className="hidden md:flex items-center gap-2">
+                  <Shield className="h-4 w-4" />
+                  Admin
+                </Button>
+              </Link>
+            )}
+
             <Button
               variant="ghost"
               size="sm"
